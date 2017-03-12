@@ -1,0 +1,24 @@
+
+  <section class="github">
+    <h2>Github Portfolio</h2>
+
+  {{#each repos}}
+
+    {{#startsWith "Portfolio" this.name}}
+    <article class="portfolio">
+      <h2>{{ this.name }}</h2>
+      <figure>
+        <picture>
+          <img data-interchange="[http://lorempixel.com/80/53/technics, small], [http://lorempixel.com/150/100/technics, medium], [http://lorempixel.com/300/200/technics, large]" alt="{{ this.name }}" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E">
+        </picture>
+        <figcaption>{{ this.name }}</figcaption>
+      </figure>
+      <p>{{ this.html_url }}</p>
+    </article>
+    {{/startsWith}}
+
+  {{/each}}
+</section>
+
+
+  </section>

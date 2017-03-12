@@ -1,0 +1,159 @@
+header {
+  @include grid-row();
+  @include grid-column();
+  display: inline-block;
+  margin-bottom: 10px;
+
+  .logo {
+    @include grid-column(3);
+    max-height: 100%;
+    max-width: 100%;
+    min-width: 100px;
+
+    svg {
+      height: 120px;
+    }
+
+
+    @include breakpoint(medium down) {
+      @include grid-column();
+      text-align: center;
+
+      svg {
+        max-height: 80px;
+      }
+
+    }
+  }
+  
+  
+  .title{
+    text-align: right;
+
+    @include breakpoint(medium down) {
+      @include grid-column();
+      text-align: center;
+    }
+    
+
+    h1{
+      font-family: "Lato", sans-serif;
+      font-weight: 100;
+      font-size: 3em;
+      color: #2d3c49;
+    }
+    h2{
+      font-family: "Lato", sans-serif;
+      font-weight: 400;
+      font-size: 1.3em;
+      color: #2d3c49;
+    }
+    
+
+  }
+}
+
+nav{
+  @include grid-row();
+  @include grid-column();
+  margin-bottom: 10px;
+  border-bottom: 3px solid #7d97ad;
+  text-align: right;
+}
+
+main {
+  @include grid-row;
+  @include grid-column;
+
+  .intro{
+      img{
+        width: 90vw;
+        max-height: 100%;
+      }
+  }
+}
+
+.intro{
+  h2{
+    display: none;
+  }
+}
+
+section {
+  @include grid-row;
+  @include grid-column;
+  margin-top: 2em;
+
+  h2{
+    @include grid-row;
+    @include grid-column;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    color: #7d97ad;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.5em;
+  }
+}
+
+article {
+  @include grid-column(4);
+  margin-bottom: 0.5em;
+  padding: 0;
+  
+  h2{
+    display: none;
+  }
+  
+  h3{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 1.1em;
+  }
+
+  figure{
+    img{
+      display: block;
+      margin: auto;
+      width: 96%;
+    }
+
+    figcaption{
+      font-family: "Lato", sans-serif;
+      font-weight: 400;
+      margin-top: 1em;
+    }
+  }
+
+  p{
+    word-wrap: break-word;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    margin-top: 0;
+  }
+
+  @include breakpoint(large down) {
+    @include grid-column(6);
+  }
+
+  @include breakpoint(medium down) {
+    @include grid-column();
+  }
+}
+
+article:last-child:not(:first-child) {
+  float: left;
+}
+
+body{
+    max-width: 960px;
+    margin: auto;
+}
+
+
+hr{
+    margin-top: 0.5em;
+    width: 98%;
+}
+
+

@@ -1,5 +1,6 @@
 # Your project's server will run on localhost:xxxx at this port
 PORT: 8000
+SSPORT: 8989
 
 # Autoprefixer will make sure your CSS works with these browsers
 COMPATIBILITY:
@@ -18,7 +19,7 @@ UNCSS_OPTIONS:
 # Gulp will reference these paths when it copies files
 PATHS:
   # Path to dist folder
-  dist: "dist"  
+  dist: "docs"
   # Paths to static assets that aren't images, CSS, or JavaScript
   assets:
     - "src/assets/**/*"
@@ -63,5 +64,5 @@ PATHS:
 
 # Github repo
 GITHUB:
-  handle: "screamingjungle" 
+  handle: "screamingjungle"
   jsonfilename: "github"

@@ -14,6 +14,7 @@ import imageResize from 'gulp-image-resize';
 import autoprefixer from 'gulp-autoprefixer';
 import remoteSrc from 'gulp-remote-src';
 import request  from 'request';
+import htmlmin  from 'gulp-htmlmin';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -22,7 +23,7 @@ const $ = plugins();
 const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from settings.yml
-const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS, GITHUB } = loadConfig();
+const { COMPATIBILITY, PORT, SSPORT, UNCSS_OPTIONS, PATHS, GITHUB } = loadConfig();
 
 function loadConfig() {
   let ymlFile = fs.readFileSync('config.yml', 'utf8');
@@ -55,11 +56,11 @@ gulp.task('resize_images',
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy, 'resize_images'), styleGuide));
+ gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy, 'resize_images')));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
-  gulp.series('build', server, watch));
+  gulp.series('build', styleGuide, server, watch));
 
 // create screenshots of index page.
 gulp.task('screenshot',
@@ -122,6 +123,7 @@ function pages() {
       data: 'src/data/',
       helpers: 'src/helpers/'
     }))
+    .pipe($.if(PRODUCTION, $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest(PATHS.dist));
 }
 
@@ -191,10 +193,9 @@ function screens() {
   return gulp.src(PATHS.dist + '/index.html')
     .pipe(localScreenshots({
       width: ['1200', '768', '480', '320'],
-      port: 8989, // default 8080 is in use
+      port: SSPORT, // default 8080 is in use
       folder: PATHS.dist + '/assets/ss',
       path: PATHS.dist + '/',
-      
      }))
 }
 

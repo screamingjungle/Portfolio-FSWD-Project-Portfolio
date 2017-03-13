@@ -5,7 +5,7 @@
       <figure>
         <picture>
           {{#ifequal this.image_url undefined}}
-          <img alt="{{ this.name }}" src="assets/img/portfolio/320/{{ this.name }}.jpg">
+          <img alt="{{ this.name }}" src="{{root}}assets/img/portfolio/320/{{ this.name }}.jpg">
           {{else}}
           <img alt="{{ this.name }}" src="{{ this.image_url }}.jpg">
           {{/ifequal}}

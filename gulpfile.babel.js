@@ -124,7 +124,10 @@ function pages() {
       data: 'src/data/',
       helpers: 'src/helpers/'
     }))
-    .pipe($.if(PRODUCTION, $.htmlmin({collapseWhitespace: true})))
+    .pipe($.if(PRODUCTION, $.htmlmin({  collapseWhitespace: true,
+                                        minifyJS: true,
+                                        removeComments: true
+    })))
     .pipe(gulp.dest(PATHS.dist));
 }
 

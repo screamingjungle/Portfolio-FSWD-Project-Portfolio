@@ -43,7 +43,8 @@ var resizeImageTasks = [];
          imageMagick: true
        }))
       .pipe($.imagemin({
-        progressive: true
+        progressive: true,
+        verbose: true
       }))
       .pipe(gulp.dest(PATHS.dist + '/assets/img/portfolio/' + size + '/'))
   });
@@ -154,7 +155,7 @@ function sass() {
       browsers: COMPATIBILITY
     }))
     // Comment in the pipe below to run UnCSS in production
-    //.pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
+    .pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
     .pipe($.if(PRODUCTION, $.cssnano()))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
     .pipe(gulp.dest(PATHS.dist + '/assets/css'))
@@ -220,6 +221,7 @@ function watch() {
   gulp.watch('src/{layouts,partials}/**/*.html').on('all', gulp.series(resetPages, pages, browser.reload));
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
   gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, browser.reload));
-  gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
+  gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, 'resize_images', browser.reload));
+  gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
   gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
 }

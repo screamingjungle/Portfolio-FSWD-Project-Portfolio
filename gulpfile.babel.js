@@ -56,7 +56,7 @@ gulp.task('resize_images',
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy, 'resize_images')));
+ gulp.series(clean, gulp.parallel(pages, sass, javascript, copy, 'resize_images', images)));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',

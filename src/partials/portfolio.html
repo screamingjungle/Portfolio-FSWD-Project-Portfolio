@@ -1,6 +1,5 @@
-  {{#each github}}
+  {{#each portfolio}}
 
-    {{#startsWith "Portfolio" this.name}}
     <article class="portfolio">
       <h2>{{ this.name }}</h2>
       <figure>
@@ -14,9 +13,9 @@
         <figcaption>
           <h3><a href="{{ this.html_utl }}">{{ this.name }}</a></h3>
           <p>{{ this.description }}</p>
-          <p><a data-open="{{ this.id }}ModalGithub">More</a></p>
+          <p><a data-open="{{ this.id }}ModalPortfolio">More</a></p>
 
-          <div class="reveal portfolio github" id="{{ this.id }}ModalGithub" data-reveal>
+          <div class="reveal portfolio other" id="{{ this.id }}ModalPortfolio" data-reveal>
             <h1>{{ this.name }}</h1>
             <p class="lead">
               {{ this.description }}
@@ -24,12 +23,10 @@
             <p>
               <a href="{{ this.html_url }}">{{ this.html_url }}</a>
             </p>
-            
+
             <ul>
               <li>Language: {{ this.language }}</li>
-              <li>Open Issues: {{ this.open_issues_count }}</li>
-              <li>Stars: {{ this.stargazers_count }}</li>
-              <li>Watchers: {{ this.watchers_count }}</li>
+              <li>Other skills: {{ this.skills }}</li>
             </ul>
             <button class="close-button" data-close aria-label="Close modal" type="button">
               <span aria-hidden="true">&times;</span>
@@ -39,6 +36,5 @@
       </figure>
 
     </article>
-    {{/startsWith}}
 
   {{/each}}

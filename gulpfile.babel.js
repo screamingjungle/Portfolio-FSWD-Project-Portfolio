@@ -10,6 +10,10 @@ import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
 import localScreenshots from 'gulp-local-screenshots';
+import imageResize from 'gulp-image-resize';
+import autoprefixer from 'gulp-autoprefixer';
+import remoteSrc from 'gulp-remote-src';
+import request  from 'request';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -18,16 +22,40 @@ const $ = plugins();
 const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from settings.yml
-const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
+const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS, GITHUB } = loadConfig();
 
 function loadConfig() {
   let ymlFile = fs.readFileSync('config.yml', 'utf8');
   return yaml.load(ymlFile);
 }
 
+var resizeImageTasks = [];
+
+[150,320,480,768,1200].forEach(function(size) {
+  var resizeImageTask = 'resize_' + size;
+  gulp.task(resizeImageTask, function() {
+    return gulp.src('src/assets/img/portfolio/**/*.{jpg,png,tiff}')
+      .pipe(imageResize({
+         width:  size,
+         //height: size,
+         upscale: false,
+         imageMagick: true
+       }))
+      .pipe($.imagemin({
+        progressive: true
+      }))
+      .pipe(gulp.dest(PATHS.dist + '/assets/img/portfolio/' + size + '/'))
+  });
+  resizeImageTasks.push(resizeImageTask);
+});
+
+//resize static portfolio images
+gulp.task('resize_images',
+  gulp.series(resizeImageTasks));
+
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy), styleGuide));
+ gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy, 'resize_images'), styleGuide));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -36,6 +64,40 @@ gulp.task('default',
 // create screenshots of index page.
 gulp.task('screenshot',
   gulp.series(screens));
+
+// create screenshots of index page.
+gulp.task('github',
+  gulp.series(github));
+
+function github() {
+
+  var options = {
+    url: 'https://api.github.com/users/' + GITHUB.handle + '/repos',
+    headers: {
+      'User-Agent': 'request'
+    }
+  };
+
+  function callback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+
+      // save response to json file
+      //var json = JSON.stringify(body);
+      var json = body;
+      var fs = require('fs');
+      fs.writeFile('src/data/' + GITHUB.jsonfilename + '.json', json, 'utf8', (err) => {
+        if (err){
+          console.log(e);
+          throw err;
+        }
+      });
+    }
+  }
+
+  return request(options, callback);
+
+}
+
 
 // Delete the "dist" folder
 // This happens every time a build starts
@@ -115,11 +177,14 @@ function javascript() {
 // In production, the images are compressed
 function images() {
   return gulp.src('src/assets/img/**/*')
-    .pipe($.if(PRODUCTION, $.imagemin({
+    //.pipe($.if(PRODUCTION, $.imagemin({
+    .pipe($.imagemin({
       progressive: true
-    })))
+    //})))
+    }))
     .pipe(gulp.dest(PATHS.dist + '/assets/img'));
 }
+
 
 // create screenshots of index page.
 function screens() {

@@ -1,3 +1,8 @@
+---
+browserTitle: Browser Title
+pageTitle: Page Title
+description: Meta description here
+---
 <header class="row">
     <div class="logo small-order-2 medium-order-2 large-order-1">
         <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><style>.st0{fill:#02b3e4}</style><g id="_x38_0-mark-white"><path id="mark_28_" class="st0" d="M13.3 0L0 7.7v17.6C0 33.4 6.5 40 14.6 40c2.7 0 5.2-.7 7.4-1.9l10.8-6.2C37.1 29.6 40 25.2 40 20V1.6L37.4.1 26 6.2v19.2c0 .8-.1 1.6-.2 2.4-.2.8-.4 1.5-.7 2.2l-.3.6c-.4 0-2.9-.9-4.2-1.8-.6-.4-1.1-.8-1.6-1.3s-.9-1-1.3-1.6c-.4-.6-.7-1.2-1-1.8-.3-.6-.5-1.3-.6-2-.1-.7-.1-1.4-.1-2.1V1.6L13.3 0zm6.5 36.2c-.7.3-1.7.7-2.5.9-.8.2-1.5.2-2.3.2-.8 0-1.6-.1-2.4-.3-.8-.2-1.5-.4-2.2-.7-.7-.3-1.4-.7-2-1.1C6.6 34.1 5.7 33.1 5 32c-.4-.6-.8-1.3-1.1-2-.3-.7-.5-1.5-.7-2.3-.2-.8-.2-1.6-.2-2.4V9.2l10-6.1V20c0 6.4 4.7 11.8 10.7 13.1-.2.3-.4.6-.7.8-1.1 1.1-2 1.8-3.2 2.3zm17-14c-.1.7-.4 1.4-.6 2-.3.6-.6 1.2-1 1.8-.4.6-1.6 2.1-3.2 3-1.6.9-3.1 1.2-4 1.4.6-1.6 1-3.2 1-5V7.7l8-4.6V20c0 .8 0 1.5-.2 2.2z"/></g></svg>
@@ -19,49 +24,13 @@
 
   <section class="featured">
     <h2>Featured Work</h2>
-    <article class="portfolio">
-      <h2>Work #1</h2>
-      <figure>
-        <picture>
-          <img data-interchange="[http://lorempixel.com/80/53/technics, small], [http://lorempixel.com/150/100/technics, medium], [http://lorempixel.com/300/200/technics, large]" alt="this is the image of portfolio 1" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E">
-        </picture>
-        <figcaption>
-          <h3>APPIFY</h3>
-          <p>https://github.com/udacity/Appify/</p>
-        </figcaption>
-      </figure>
-    </article>
 
-    <article class="portfolio">
-      <h2>Work #2</h2>
-      <figure>
-        <picture>
-          <img data-interchange="[http://lorempixel.com/80/53/food, small], [http://lorempixel.com/150/100/food, medium], [http://lorempixel.com/300/200/food, large]" alt="this is the image of portfolio 2" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E">
-        </picture>
-        <figcaption>
-          <h3>SUNFLOWER</h3>
-          <p>https://github.com/udacity/Sunflower/</p>
-        </figcaption>
-      </figure>
-    </article>
-
-    <article class="portfolio">
-      <h2>Work #3</h2>
-      <figure>
-        <picture>
-          <img data-interchange="[http://lorempixel.com/80/53/transport, small], [http://lorempixel.com/150/100/transport, medium], [http://lorempixel.com/300/200/transport, large]" alt="this is the image of portfolio 3" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E">
-        </picture>
-        <figcaption>
-          <h3>BOKEH</h3>
-          <p>https://github.com/udacity/Bokeh/</p>
-        </figcaption>
-      </figure>
-    </article>
+    {{> portfolio}}
+    {{> udacity}}
+    {{> github}}
 
   </section>
-  
-  {{> github}}
-  
+
 </main>
 
 <footer>

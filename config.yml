@@ -60,3 +60,8 @@ PATHS:
     # Paths to your own project code are here
     - "src/assets/js/!(app).js"
     - "src/assets/js/app.js"
+
+# Github repo
+GITHUB:
+  handle: "screamingjungle" 
+  jsonfilename: "github"

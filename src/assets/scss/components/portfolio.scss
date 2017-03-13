@@ -83,7 +83,9 @@ section {
   @include grid-row;
   @include grid-column;
   margin-top: 2em;
-
+  display: flex;
+  flex-wrap: wrap;
+    
   h2{
     @include grid-row;
     @include grid-column;
@@ -100,7 +102,7 @@ article {
   @include grid-column(4);
   margin-bottom: 0.5em;
   padding: 0;
-  
+
   h2{
     display: none;
   }
@@ -145,9 +147,20 @@ article:last-child:not(:first-child) {
   float: left;
 }
 
+.reveal.portfolio{
+
+  ul {
+    list-style-type: none;
+  }
+
+}
+
 body{
     max-width: 960px;
     margin: auto;
+      font-family: "Lato", sans-serif;
+      font-weight: 400;
+      font-size: 1em;
 }
 
 
@@ -156,4 +169,10 @@ hr{
     width: 98%;
 }
 
-
+// bug with modal on small screens - width is set to 600px.
+.reveal {
+  @include breakpoint(large down) {
+    width: 100%;
+    max-width: 75rem;
+  }
+}
